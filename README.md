@@ -9,6 +9,8 @@ just Markdown files with embedded SQL — no JavaScript, no frontend build. Data
 from **[ClickPy](https://clickpy.clickhouse.com)**, the free public ClickHouse mirror
 of the official PyPI download logs. **No API key, no account, no billing.**
 
+![The PyPI Package Explorer showing download stats for numpy](docs/screenshot.png)
+
 ## Pages
 
 | Page | What it shows |
