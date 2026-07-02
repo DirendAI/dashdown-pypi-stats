@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     # Pulls in everything the dashboard AND scripts/build_cache.py need:
     # dashdown core ships pandas/duckdb/requests; the extra adds clickhouse-connect.
-    "dashdown-md[clickhouse]>=0.1.8",
+    "dashdown-md[clickhouse]>=0.1.9",
 ]
 
 [tool.uv]

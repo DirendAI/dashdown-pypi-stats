@@ -197,7 +197,7 @@ wheels = [
 
 [[package]]
 name = "dashdown-md"
-version = "0.1.8"
+version = "0.1.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "duckdb" },
@@ -214,9 +214,9 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "watchfiles" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e8/1b/de5e6efbec6cab762f9798867b6fcbae189c2cd74d190696390517077329/dashdown_md-0.1.8.tar.gz", hash = "sha256:de2c0aa12501d7c46ebc488ec15a1db123b549010d92267ec7f585e6c12d70fe", size = 2214181, upload-time = "2026-07-01T22:49:06.038Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/28/af/1cfdd395aec27bb4b249beeb07d2e706b12bf2bccf0395201c0bf839642c/dashdown_md-0.1.9.tar.gz", hash = "sha256:4439921c4c6ddbf4428ff287022c6b862a9aed34d850fcdea2cb42c845087d5f", size = 2225425, upload-time = "2026-07-02T14:11:36.132Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8b/c5/fadc84679f66c389e56f12c1ae89a18860dd7001246bfa654361a4b1866e/dashdown_md-0.1.8-py3-none-any.whl", hash = "sha256:078f2857e219f3dbb4f423586d727dd7e99288200f68b095e8925c71aa3d6da2", size = 2159728, upload-time = "2026-07-01T22:49:03.825Z" },
+    { url = "https://files.pythonhosted.org/packages/f9/44/a995eb379ebf164b87654126459e800835dd3111c95810a32fe965a6e3ca/dashdown_md-0.1.9-py3-none-any.whl", hash = "sha256:008ad8cbfecdcf50fc5fc32fafe5245089eb1d6c805e2a0f682726282ecc36c1", size = 2169651, upload-time = "2026-07-02T14:11:34.325Z" },
 ]
 
 [package.optional-dependencies]
@@ -233,7 +233,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "dashdown-md", extras = ["clickhouse"], specifier = ">=0.1.8" }]
+requires-dist = [{ name = "dashdown-md", extras = ["clickhouse"], specifier = ">=0.1.9" }]
 
 [[package]]
 name = "duckdb"
