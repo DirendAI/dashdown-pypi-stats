@@ -1,0 +1,12 @@
+# Dashdown build artifacts
+.dist/
+.pdf/
+.shots/
+.secrets/
+# Python cache
+__pycache__/
+*.pyc
+# uv virtualenv
+.venv/
+# macOS
+.DS_Store

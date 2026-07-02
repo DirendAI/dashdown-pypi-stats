@@ -1,0 +1,25 @@
+# Two connectors:
+#
+# `clickpy` — the free, public ClickHouse PyPI dataset (ClickPy) over the native
+# clickhouse connector (clickhouse-connect). No API key, no billing: the `play`
+# read-only user exposes the whole `pypi` database of pre-aggregated download
+# tables. All live chart data comes from here (see clickpy.py for the helpers).
+#
+# `main` — the local Parquet caches under data/ (one table per file, rebuilt with
+# `python scripts/build_cache.py`): pypi_projects (every PyPI package name — backs
+# the searchable <Combobox> filters), pypi_top_packages (ranked top-N catalog), and
+# pypi_daily_cache (per-day downloads for the top N — serves the explorer's daily
+# series and KPI total without spending ClickPy quota; see clickpy.daily_series).
+clickpy:
+  type: clickhouse
+  host: sql-clickhouse.clickhouse.com
+  port: 443
+  user: play
+  database: pypi
+  secure: true
+  connect_args:
+    ca_cert: certifi # verify TLS against certifi's bundle — python.org macOS builds ship no system CAs
+
+main:
+  type: parquet
+  directory: data

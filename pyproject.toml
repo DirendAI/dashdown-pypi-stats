@@ -1,0 +1,14 @@
+[project]
+name = "dashdown-pypi-stats"
+version = "0.1.0"
+description = "PyPI Downloads Explorer — a Dashdown dashboard on the public ClickHouse PyPI dataset (ClickPy)"
+requires-python = ">=3.12"
+dependencies = [
+    # Pulls in everything the dashboard AND scripts/build_cache.py need:
+    # dashdown core ships pandas/duckdb/requests; the extra adds clickhouse-connect.
+    "dashdown-md[clickhouse]>=0.1.8",
+]
+
+[tool.uv]
+# A dashboard, not a distributable package — dependencies only, no build.
+package = false

@@ -1,0 +1,40 @@
+/* assets/custom.css — PyPI / Python brand reskin. Auto-linked last, so rules win
+   by stylesheet order (no !important needed). */
+
+/* 1) Design tokens — a touch more air and slightly squarer cards. */
+:root {
+  --dashdown-radius-card: 0.625rem;
+  --dashdown-grid-gap: 1.1rem;
+  --dashdown-space-section: 1.9rem;
+}
+
+/* 2) Brand colours — re-pin DaisyUI's oklch vars to the Python blue, scoped per
+      theme so other DaisyUI themes keep their own look. */
+[data-theme="light"] {
+  --p:  56% 0.105 250;   /* Python blue #4B8BBE-ish accent */
+  --pc: 100% 0 0;        /* text on the accent */
+}
+[data-theme="dark"] {
+  --p:  74% 0.10 248;    /* lighter blue for the dark background */
+}
+
+/* 3) Chrome — a subtle blue→yellow hairline under the sticky header, a tighter
+      brand title, and a blue accent bar on the active nav link. */
+.dashdown-header {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #4B8BBE 0%, #FFD43B 100%) 1;
+}
+.dashdown-brand-title {
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.dashdown-sidenav-link[aria-current="page"] {
+  box-shadow: inset 3px 0 0 0 oklch(var(--p));
+}
+
+/* 4) Prose — underlined section rules and comfortable links. */
+.dashdown-prose h2 {
+  border-bottom: 1px solid oklch(var(--b3));
+  padding-bottom: 0.25rem;
+}
+.dashdown-prose a { text-underline-offset: 2px; }

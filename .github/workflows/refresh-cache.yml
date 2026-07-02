@@ -1,0 +1,47 @@
+# Rebuilds the local Parquet caches (package-name catalog, top-5000 list, daily
+# download snapshot) once a day and commits them. scripts/build_cache.py exits
+# non-zero — and nothing is committed — if ClickPy returns incomplete data, so a
+# bad refresh shows up as a red run instead of a silently short cache.
+name: Refresh data caches
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # daily, 03:17 UTC — off the top-of-hour rush
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-cache
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        # dashdown-md core ships pandas/duckdb/requests; the clickhouse extra adds
+        # clickhouse-connect for the `clickpy` connector the script queries through.
+        run: pip install 'dashdown-md[clickhouse]'
+
+      - name: Rebuild parquet caches
+        run: python scripts/build_cache.py
+
+      - name: Commit refreshed caches
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.parquet
+          if git diff --cached --quiet; then
+            echo "Caches unchanged — nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh data caches [skip ci]"
+          git push

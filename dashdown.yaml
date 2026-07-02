@@ -1,0 +1,40 @@
+title: PyPI Package Explorer
+
+# Chart series colours — anchored on the Python brand blue + a deepened gold,
+# then a distinct categorical spread for the breakdown charts. Every hue sits in
+# the OKLCH L 0.48–0.67 band with chroma ≥ 0.10, ≥ 3:1 contrast on both the
+# light and dark surfaces, and ≥ 12 ΔE adjacent-pair separation under CVD
+# simulation (validated with the dataviz palette checker in both modes).
+branding:
+  palette: ["#4B8BBE", "#B8860B", "#1D93B5", "#D07C2E", "#9B59B6", "#2A9D8F", "#DD5F3F", "#C2537C"]
+
+format:
+  locale: en-US
+  date_format: MMM D, YYYY
+
+# One project-wide period control in the header. Every query opts in by using the
+# ${date_start} / ${date_end} placeholders. The presets are deliberately capped at
+# 90 days — there is NO "this year"/"all time" preset, because an unbounded window
+# over `file_downloads` scans hundreds of GiB per query (see the About page).
+global_filters:
+  date:
+    enabled: true
+    label: Period
+    default: last_30_days
+    presets: last_7_days,last_30_days,last_90_days,this_month
+    start_param: date_start
+    end_param: date_end
+
+# Every BigQuery query is slow + billed, so wait longer after the last keystroke
+# (or slider drag) before a filter change re-fetches — deliberate typing of a
+# package name won't fire a wave of partial queries. Per-control `debounce=` can
+# still override this.
+filters:
+  debounce: 500
+
+search:
+  enabled: true
+  placeholder: "Find a page…"
+
+sidebar:
+  collapsed: true
