@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so the pre-push rebase below has a base
 
       - uses: actions/setup-python@v5
         with:
@@ -44,4 +46,13 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh data caches [skip ci]"
-          git push
+          # main may have advanced since checkout (a docs/code push). The refresh
+          # only touches data/*.parquet, so rebasing our commit onto the latest
+          # main never conflicts — retry a few times to also ride out any race.
+          for attempt in 1 2 3 4 5; do
+            git push && exit 0
+            echo "Push rejected (attempt $attempt) — rebasing onto latest main…"
+            git pull --rebase origin main
+          done
+          echo "Failed to push after 5 attempts." >&2
+          exit 1
